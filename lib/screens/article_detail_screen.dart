@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/article.dart';
+import '../providers/article_provider.dart';
 
 class ArticleDetailScreen extends StatelessWidget {
   final Article article;
@@ -9,26 +10,38 @@ class ArticleDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ArticleProvider>(context);
+    final isFavorite = provider.isFavorite(article.id);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(article.title),
+        title: Text("Full Article"),
+        actions: [
+          IconButton(
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: isFavorite ? Colors.red : null,
+            ),
+            onPressed: () {
+              provider.toggleFavorite(article.id);
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-           children: [
-             SizedBox(height: 10,),
+          children: [
             Text(
               article.title,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(article.body),
           ],
         ),
       ),
     );
   }
-
 }

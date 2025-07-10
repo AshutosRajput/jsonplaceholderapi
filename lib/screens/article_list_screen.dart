@@ -10,30 +10,33 @@ class ArticleListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ArticleProvider>(context);
-    return Scaffold(
-      appBar: AppBar(title: const Text('Articles')),
-      body: provider.isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-            itemCount: provider.articles.length,
-            itemBuilder: (context, index) {
-              final article = provider.articles[index];
-              return ListTile(
-                title: Card(child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 12),
-                  child: Text(article.title),
-                )),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => ArticleDetailScreen(article: article),
-                    ),
-                  );
-                },
-              );
-            },
-          ),
+    return RefreshIndicator(
+      onRefresh:()=>provider.refreshData(),
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Articles')),
+        body: provider.isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : ListView.builder(
+              itemCount: provider.articles.length,
+              itemBuilder: (context, index) {
+                final article = provider.articles[index];
+                return ListTile(
+                  title: Card(child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 12),
+                    child: Text(article.title),
+                  )),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ArticleDetailScreen(article: article),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+      ),
     );
   }
 }

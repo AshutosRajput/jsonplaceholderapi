@@ -22,13 +22,13 @@ class MyApp extends StatelessWidget {
       ),
 
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Articles App',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
        initialRoute: AppRoutes.home,
        onGenerateRoute: AppRoutes.generateRoute,
-
       ),
     );
   }
