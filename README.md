@@ -1,16 +1,25 @@
-# technicaltest
+# Flutter Developer Technical Task
 
-A new Flutter project.
+A simple Flutter application that displays a list of articles fetched from a public API with navigation to detailed views.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📱 Features
 
-A few resources to get you started if this is your first Flutter project:
+### Arcticles List Screen
+- Fetches articles from: `https://jsonplaceholder.typicode.com/posts`
+- Displays titles in a scrollable `ListView`
+- Shows a loading indicator while data is being fetched
+- Includes **pull-to-refresh**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Artical Detail Screen
+- Tapping an article navigates to the detail screen
+- Displays the full title and body of the selected article
+- Includes a **Favorite button**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+### State Management
+- I have used provider statemanagement
+
+---
+
